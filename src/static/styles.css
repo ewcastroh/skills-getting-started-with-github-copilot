@@ -185,16 +185,9 @@ button:hover {
   transition: background-color 0.15s, transform 0.08s;
 }
 
-/* Subtle bullet marker so the list reads as "bulleted" */
+/* Hide the bullet marker */
 .participant::before {
-  content: "•";
-  position: absolute;
-  left: 6px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #bdbdbd;
-  font-size: 14px;
-  line-height: 1;
+  display: none;
 }
 
 .participant:hover {
@@ -219,6 +212,28 @@ button:hover {
 .participant-name {
   font-size: 14px;
   color: #333;
+}
+
+.delete-btn {
+  background-color: transparent;
+  color: #999;
+  border: none;
+  padding: 4px 8px;
+  font-size: 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: auto;
+  transition: color 0.15s, background-color 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+}
+
+.delete-btn:hover {
+  color: #d32f2f;
+  background-color: #ffebee;
 }
 
 /* Empty-state message */

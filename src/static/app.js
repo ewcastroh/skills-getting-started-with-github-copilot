@@ -4,6 +4,42 @@ document.addEventListener("DOMContentLoaded", () => {
   const signupForm = document.getElementById("signup-form");
   const messageDiv = document.getElementById("message");
 
+  // Function to unregister a participant from an activity
+  async function handleUnregister(activityName, email, deleteBtn) {
+    try {
+      const response = await fetch(
+        `/activities/${encodeURIComponent(activityName)}/unregister?email=${encodeURIComponent(email)}`,
+        {
+          method: "POST",
+        }
+      );
+
+      const result = await response.json();
+
+      if (response.ok) {
+        messageDiv.textContent = result.message;
+        messageDiv.className = "message success";
+        // Refresh activities so the participant is removed
+        fetchActivities();
+      } else {
+        messageDiv.textContent = result.detail || "Failed to unregister participant";
+        messageDiv.className = "message error";
+      }
+
+      messageDiv.classList.remove("hidden");
+
+      // Hide message after 5 seconds
+      setTimeout(() => {
+        messageDiv.classList.add("hidden");
+      }, 5000);
+    } catch (error) {
+      messageDiv.textContent = "Failed to unregister. Please try again.";
+      messageDiv.className = "message error";
+      messageDiv.classList.remove("hidden");
+      console.error("Error unregistering:", error);
+    }
+  }
+
   // Function to fetch activities from API
   async function fetchActivities() {
     try {
@@ -45,8 +81,18 @@ document.addEventListener("DOMContentLoaded", () => {
               nameSpan.className = "participant-name";
               nameSpan.textContent = p;
 
+              const deleteBtn = document.createElement("button");
+              deleteBtn.className = "delete-btn";
+              deleteBtn.textContent = "×";
+              deleteBtn.setAttribute("aria-label", `Remove ${p} from ${name}`);
+              deleteBtn.addEventListener("click", async (event) => {
+                event.preventDefault();
+                await handleUnregister(name, p, deleteBtn);
+              });
+
               li.appendChild(avatar);
               li.appendChild(nameSpan);
+              li.appendChild(deleteBtn);
               list.appendChild(li);
             });
             clone.querySelector(".participants-empty").classList.add("hidden");
@@ -111,8 +157,18 @@ document.addEventListener("DOMContentLoaded", () => {
               nameSpan.className = "participant-name";
               nameSpan.textContent = p;
 
+              const deleteBtn = document.createElement("button");
+              deleteBtn.className = "delete-btn";
+              deleteBtn.textContent = "×";
+              deleteBtn.setAttribute("aria-label", `Remove ${p} from ${name}`);
+              deleteBtn.addEventListener("click", async (event) => {
+                event.preventDefault();
+                await handleUnregister(name, p, deleteBtn);
+              });
+
               li.appendChild(avatar);
               li.appendChild(nameSpan);
+              li.appendChild(deleteBtn);
               list.appendChild(li);
             });
           }
@@ -173,7 +229,7 @@ document.addEventListener("DOMContentLoaded", () => {
         messageDiv.className = "message success";
         signupForm.reset();
         // Refresh activities so new participant appears immediately
-        fetchActivities();
+        await fetchActivities();
       } else {
         messageDiv.textContent = result.detail || "An error occurred";
         messageDiv.className = "message error";
