@@ -129,13 +129,13 @@ document.addEventListener("DOMContentLoaded", () => {
           participantsSection.appendChild(emptyMsg);
 
           activitiesList.appendChild(participantsSection);
-
-          // Add option to select dropdown
-          const option = document.createElement("option");
-          option.value = name;
-          option.textContent = name;
-          activitySelect.appendChild(option);
         }
+
+        // Add option to select dropdown (moved out of else so it always executes)
+        const option = document.createElement("option");
+        option.value = name;
+        option.textContent = name;
+        activitySelect.appendChild(option);
       });
     } catch (error) {
       activitiesList.innerHTML = "<p>Failed to load activities. Please try again later.</p>";
