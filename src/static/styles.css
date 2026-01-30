@@ -63,6 +63,7 @@ section h3 {
   border: 1px solid #ddd;
   border-radius: 5px;
   background-color: #f9f9f9;
+  padding-bottom: 18px; /* make room for participants */
 }
 
 .activity-card h4 {
@@ -130,6 +131,116 @@ button:hover {
   background-color: #d1ecf1;
   color: #0c5460;
   border: 1px solid #bee5eb;
+}
+
+/* Participants styles */
+.participants-section {
+  margin-top: 12px;
+}
+
+.participants-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.participants-header h5 {
+  margin: 0;
+  font-size: 14px;
+  color: #1a237e;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+
+.participants-header .count {
+  background: #e8eaf6;
+  color: #1a237e;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* make the participants list look clean and friendly */
+.participants {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.participant {
+  position: relative; /* for the bullet pseudo-element */
+  padding-left: 20px; /* leave room for the bullet */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px;
+  border-radius: 6px;
+  transition: background-color 0.15s, transform 0.08s;
+}
+
+/* Hide the bullet marker */
+.participant::before {
+  display: none;
+}
+
+.participant:hover {
+  background-color: #fafafa;
+  transform: translateY(-1px);
+}
+
+.avatar {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  border-radius: 50%;
+  background-color: #e8eaf6;
+  color: #1a237e;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.participant-name {
+  font-size: 14px;
+  color: #333;
+}
+
+.delete-btn {
+  background-color: transparent;
+  color: #999;
+  border: none;
+  padding: 4px 8px;
+  font-size: 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: auto;
+  transition: color 0.15s, background-color 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+}
+
+.delete-btn:hover {
+  color: #d32f2f;
+  background-color: #ffebee;
+}
+
+/* Empty-state message */
+.participants-empty {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #777;
 }
 
 .hidden {

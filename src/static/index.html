@@ -15,6 +15,29 @@
     <main>
       <section id="activities-container">
         <h3>Available Activities</h3>
+
+        <!-- Template for activity cards (used by JS to render each activity) -->
+        <template id="activity-template">
+          <div class="activity-card">
+            <h4 class="activity-title">Activity Name</h4>
+            <p class="activity-desc">Description</p>
+            <p><strong>Schedule:</strong> <span class="activity-schedule">TBD</span></p>
+            <p><strong>Availability:</strong> <span class="activity-availability">0 spots left</span></p>
+
+            <div class="participants-section">
+              <div class="participants-header">
+                <h5>Participants <span class="count">0</span></h5>
+              </div>
+
+              <ul class="participants">
+                <!-- participants inserted here -->
+              </ul>
+
+              <p class="participants-empty">No participants yet.</p>
+            </div>
+          </div>
+        </template>
+
         <div id="activities-list">
           <!-- Activities will be loaded here -->
           <p>Loading activities...</p>
@@ -37,7 +60,7 @@
           </div>
           <button type="submit">Sign Up</button>
         </form>
-        <div id="message" class="hidden"></div>
+        <div id="message" class="message hidden"></div>
       </section>
     </main>
 
